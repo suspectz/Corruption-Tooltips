@@ -1,0 +1,1 @@
+if GetLocale() ~= "znCN" then return end

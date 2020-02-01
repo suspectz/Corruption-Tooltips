@@ -1,0 +1,10 @@
+## Interface: 80300
+## Title: Corruption Tooltips
+## Notes: Simple addon to show name and level of corruption on item tooltips.
+## Version: 1.0
+## Author: Anayanka (Defias Brotherhood - EU)
+
+embeds.xml
+locales.xml
+Ranks.lua
+CorruptionTooltips.lua
