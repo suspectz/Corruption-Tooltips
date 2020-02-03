@@ -7,13 +7,36 @@ function CorruptionTooltips:OnEnable()
     self:SecureHookScript(EmbeddedItemTooltip, 'OnTooltipSetItem', 'TooltipHook')
 end
 
+local function GetItemSplit(itemLink)
+  local itemString = string.match(itemLink, "item:([%-?%d:]+)")
+  local itemSplit = {}
+
+  -- Split data into a table
+  for _, v in ipairs({strsplit(":", itemString)}) do
+    if v == "" then
+      itemSplit[#itemSplit + 1] = 0
+    else
+      itemSplit[#itemSplit + 1] = tonumber(v)
+    end
+  end
+
+  return itemSplit
+end
+
 function CorruptionTooltips:CreateTooltip(self)
 	local name, item = self:GetItem()
   	if not name then return end
 
   	if IsCorruptedItem(item) then
 
-		local corruption = CorruptionTooltips:GetCorruption(self)
+        local itemSplit = GetItemSplit(item)
+        local bonuses = {}
+
+        for index=1, itemSplit[13] do
+            bonuses[#bonuses + 1] = itemSplit[13 + index]
+        end
+
+		local corruption = CorruptionTooltips:GetCorruption(bonuses)
 
 		if corruption then
 			local name = corruption[1]
@@ -25,37 +48,18 @@ function CorruptionTooltips:CreateTooltip(self)
 	end
 end
 
-function CorruptionTooltips:GetCorruption(tooltip)
-	local amount, corruption
-	for i = 1, tooltip:NumLines() do
-		local left = _G[tooltip:GetName().."TextLeft"..i]
-		local text = left:GetText()
-		local detected = string.match(text, "+(%d+) "..L["Corruption"])
-
-		if detected and amount == nil then
-			amount = detected
-		end
-
-		for j,k in pairs(R) do
-			if string.find(text, L[j][2]) then
-				corruption = {j, L[j][1]}
-			end
-		end
-
-		if amount ~= nil and corruption ~= nil then
-			if R[corruption[1]][1][amount] ~= nil then
-				return {
-					corruption[2].." "..R[corruption[1]][1][amount],
-					R[corruption[1]][2],
-				}
-			else
-				return {
-					corruption[2].." ?",
-					R[corruption[1]][2],
-				}
-			end
-		end
-	end
+function CorruptionTooltips:GetCorruption(bonuses)
+    if #bonuses > 0 then
+        for i, bonus_id in pairs(bonuses) do
+            bonus_id = tostring(bonus_id)
+            if R[bonus_id] ~= nil then
+                return {
+                    L[R[bonus_id][1]].." "..R[bonus_id][2],
+                    R[bonus_id][3],
+                }
+            end
+        end
+    end
 end
 
 function CorruptionTooltips:TooltipHook(frame)
