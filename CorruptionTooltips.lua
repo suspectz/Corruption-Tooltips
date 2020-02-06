@@ -1,10 +1,26 @@
-CorruptionTooltips = LibStub("AceAddon-3.0"):NewAddon("Corruption Tooltips", "AceEvent-3.0", "AceHook-3.0")
+CorruptionTooltips = LibStub("AceAddon-3.0"):NewAddon("Corruption Tooltips", "AceEvent-3.0", "AceConsole-3.0", "AceHook-3.0")
+
+local defaults = {
+    profile = {
+        append = true,
+    }
+}
+
+function CorruptionTooltips:OnInitialize()
+    self.db = LibStub("AceDB-3.0"):New("CorruptionTooltipsDB", defaults)
+end
 
 function CorruptionTooltips:OnEnable()
     self:SecureHookScript(GameTooltip, 'OnTooltipSetItem', 'TooltipHook')
     self:SecureHookScript(ItemRefTooltip, 'OnTooltipSetItem', 'TooltipHook')
     self:SecureHookScript(ShoppingTooltip1, 'OnTooltipSetItem', 'TooltipHook')
     self:SecureHookScript(EmbeddedItemTooltip, 'OnTooltipSetItem', 'TooltipHook')
+
+    self:RegisterChatCommand("ct", "Command")
+end
+
+function CorruptionTooltips:OnDisable()
+    self:UnregisterChatCommand("ct")
 end
 
 local function GetItemSplit(itemLink)
@@ -42,8 +58,10 @@ function CorruptionTooltips:CreateTooltip(self)
 			local name = corruption[1]
 			local icon = corruption[2]
 			local line = '|T'..icon..':12:12:0:0|t '.."|cff956dd1"..name.."|r"
-			self:AddLine(" ")
-			self:AddLine(line)
+			if CorruptionTooltips:Append(self, line) ~= true then
+                self:AddLine(" ")
+                self:AddLine(line)
+			end
 		end
 	end
 end
@@ -53,10 +71,25 @@ function CorruptionTooltips:GetCorruption(bonuses)
         for i, bonus_id in pairs(bonuses) do
             bonus_id = tostring(bonus_id)
             if R[bonus_id] ~= nil then
+                local name, rank, icon, castTime, minRange, maxRange = GetSpellInfo(R[bonus_id][3])
                 return {
-                    L[R[bonus_id][1]].." "..R[bonus_id][2],
-                    R[bonus_id][3],
+                    name.." "..R[bonus_id][2],
+                    icon,
                 }
+            end
+        end
+    end
+end
+
+function CorruptionTooltips:Append(tooltip, line)
+    if self.db.profile.append then
+        local detected
+        for i = 1, tooltip:NumLines() do
+            local left = _G[tooltip:GetName().."TextLeft"..i]
+            detected = string.match(left:GetText(), "+(%d+) "..L["Corruption"])
+            if detected ~= nil then
+                left:SetText(left:GetText().." / "..line)
+                return true
             end
         end
     end
@@ -64,4 +97,10 @@ end
 
 function CorruptionTooltips:TooltipHook(frame)
 	self:CreateTooltip(frame)
+end
+
+function CorruptionTooltips:Command(args)
+    if (args == "toggle") then
+        self.db.profile.append = not self.db.profile.append
+    end
 end
