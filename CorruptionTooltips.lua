@@ -3,6 +3,7 @@ CorruptionTooltips = LibStub("AceAddon-3.0"):NewAddon("Corruption Tooltips", "Ac
 local defaults = {
     profile = {
         append = true,
+        english = false,
     }
 }
 
@@ -72,6 +73,9 @@ function CorruptionTooltips:GetCorruption(bonuses)
             bonus_id = tostring(bonus_id)
             if R[bonus_id] ~= nil then
                 local name, rank, icon, castTime, minRange, maxRange = GetSpellInfo(R[bonus_id][3])
+                if self.db.profile.english then
+                    name = R[bonus_id][1]
+                end
                 return {
                     name.." "..R[bonus_id][2],
                     icon,
@@ -86,10 +90,13 @@ function CorruptionTooltips:Append(tooltip, line)
         local detected
         for i = 1, tooltip:NumLines() do
             local left = _G[tooltip:GetName().."TextLeft"..i]
-            detected = string.match(left:GetText(), "+(%d+) "..L["Corruption"])
-            if detected ~= nil then
-                left:SetText(left:GetText().." / "..line)
-                return true
+            local text = left:GetText()
+            if text ~= nil then
+                detected = string.match(text, "+(%d+) "..L["Corruption"])
+                if detected ~= nil then
+                    left:SetText(left:GetText().." / "..line)
+                    return true
+                end
             end
         end
     end
@@ -100,7 +107,13 @@ function CorruptionTooltips:TooltipHook(frame)
 end
 
 function CorruptionTooltips:Command(args)
-    if (args == "toggle") then
+    if args == "" then
+        print("|cff33ff99CorruptionTooltips|r: Arguments to |cffffff78/ct|r :")
+        print("|cffffff78 toggle|r - Swap position of tooltip")
+        print("|cffffff78 english|r - Swap between English and native Corruption name")
+    elseif args == "toggle" then
         self.db.profile.append = not self.db.profile.append
+    elseif args == "english" then
+        self.db.profile.english = not self.db.profile.english
     end
 end

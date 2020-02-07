@@ -1,3 +1,3 @@
-if GetLocale() ~= "znCN" then return end
+if GetLocale() ~= "zhCN" then return end
 
 L["Corruption"] = "腐蚀术"
