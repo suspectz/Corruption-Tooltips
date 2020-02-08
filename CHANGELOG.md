@@ -1,4 +1,4 @@
-**1.5.1**
+**1.5.2**
 - Quickfix to at least try and match stats.
 
 **1.5**
