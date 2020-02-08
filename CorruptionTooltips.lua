@@ -91,7 +91,7 @@ function CorruptionTooltips:Append(tooltip, line)
         for i = 1, tooltip:NumLines() do
             local left = _G[tooltip:GetName().."TextLeft"..i]
             local text = left:GetText()
-            if text ~= nil then
+            if text ~= nil and strsub(text, 1, 1) == "+" then
                 detected = string.find(text, L["Corruption"])
                 if detected ~= nil then
                     left:SetText(left:GetText().." / "..line)

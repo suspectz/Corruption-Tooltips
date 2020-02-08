@@ -1,3 +1,6 @@
+**1.5.1**
+- Quickfix to at least try and match stats.
+
 **1.5**
 - More language positioning fixes. Blizz pls.
 
