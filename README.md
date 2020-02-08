@@ -4,11 +4,11 @@ What more is there to say, this is a simple tooltip addon that you can use to ad
 
 **Features:**
 
-* Icon, name and rank for all corrupted Item tooltips (characters, bags and banks).
+Icon, name and rank for all corrupted Item tooltips (characters, bags and banks).
  
-* Ability to show Corruption in the client language, or in English.
+Ability to show Corruption in the client language, or in English.
 
-* See options using the `/ct` command.
+See options using the `/ct` command.
 
 **Why do I need it?**
 

@@ -1,3 +1,6 @@
+**1.5**
+- More language positioning fixes. Blizz pls.
+
 **1.4**
 - Fixed zhCN, added zhTW.
 - No longer error out if there are conflicting tooltip addons.

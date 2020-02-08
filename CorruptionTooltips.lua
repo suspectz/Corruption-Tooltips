@@ -92,7 +92,7 @@ function CorruptionTooltips:Append(tooltip, line)
             local left = _G[tooltip:GetName().."TextLeft"..i]
             local text = left:GetText()
             if text ~= nil then
-                detected = string.match(text, "+(%d+) "..L["Corruption"])
+                detected = string.find(text, L["Corruption"])
                 if detected ~= nil then
                     left:SetText(left:GetText().." / "..line)
                     return true
