@@ -1,3 +1,8 @@
+**1.6**
+- Fix some namespace conflicts.
+- zhCN rank updated.
+- Added summary option to list all corruptions on the overview tooltip.
+
 **1.5.2**
 - Quickfix to at least try and match stats.
 

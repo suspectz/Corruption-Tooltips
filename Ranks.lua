@@ -1,4 +1,6 @@
-R = {
+local addonName, addon = ...
+
+addon.R = {
     ["6455"] = {"Avoidant", "I", 315607},
     ["6483"] = {"Avoidant", "I", 315607},
     ["6460"] = {"Avoidant", "II", 315608},
