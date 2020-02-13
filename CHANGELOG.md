@@ -1,3 +1,9 @@
+**1.6.1**
+- Updated zhCN and zhTW translations.
+- Fixed summary configuration.
+- Added missing AceGUI.
+- Thanks to LiangYuxuan and BlueNightSky
+
 **1.6**
 - Fix some namespace conflicts.
 - zhCN rank updated.
@@ -32,4 +38,4 @@
 
 **1.0**
 
-- Intial release.
+- Initial release.
