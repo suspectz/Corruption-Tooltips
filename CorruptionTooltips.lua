@@ -22,7 +22,7 @@ function CorruptionTooltips:OnEnable()
     self:SecureHookScript(ShoppingTooltip1, 'OnTooltipSetItem', 'TooltipHook')
     self:SecureHookScript(ShoppingTooltip2, 'OnTooltipSetItem', 'TooltipHook')
     self:SecureHookScript(EmbeddedItemTooltip, 'OnTooltipSetItem', 'TooltipHook')
-    self:SecureHook('CharacterFrameCorruption_OnEnter', 'SummaryHook')
+    self:SecureHookScript(CharacterStatsPane.ItemLevelFrame.Corruption, 'OnEnter', 'SummaryHook')
 end
 
 local function GetItemSplit(itemLink)
