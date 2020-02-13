@@ -23,9 +23,9 @@ local myOptions =
             name = L["Show summary on the corruption tooltip"],
             desc = L["List your corruptions in the eye tooltip in the character screen."],
             set = function(info, val)
-                CorruptionTooltips.db.profile.append = val
+                CorruptionTooltips.db.profile.summary = val
             end,
-            get = function() return CorruptionTooltips.db.profile.append end,
+            get = function() return CorruptionTooltips.db.profile.summary end,
             width = "full",
         },
         english =
