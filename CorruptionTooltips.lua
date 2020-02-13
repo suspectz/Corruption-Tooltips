@@ -22,8 +22,7 @@ function CorruptionTooltips:OnEnable()
     self:SecureHookScript(ShoppingTooltip1, 'OnTooltipSetItem', 'TooltipHook')
     self:SecureHookScript(ShoppingTooltip2, 'OnTooltipSetItem', 'TooltipHook')
     self:SecureHookScript(EmbeddedItemTooltip, 'OnTooltipSetItem', 'TooltipHook')
-    self:SecureHook('CharacterFrameCorruption_OnEnter', 'SummaryHook')
-    --self:SecureHookScript(CharacterStatsPane.ItemLevelFrame.Corruption, 'OnEnter', 'SummaryHook')
+    self:SecureHookScript(CharacterStatsPane.ItemLevelFrame.Corruption, 'OnEnter', 'SummaryHook')
 end
 
 local function GetItemSplit(itemLink)
@@ -42,8 +41,8 @@ local function GetItemSplit(itemLink)
   return itemSplit
 end
 
-function CorruptionTooltips:CreateTooltip(self)
-	local name, item = self:GetItem()
+function CorruptionTooltips:CreateTooltip(tooltip)
+	local name, item = tooltip:GetItem()
   	if not name then return end
 
   	if IsCorruptedItem(item) then
@@ -60,9 +59,9 @@ function CorruptionTooltips:CreateTooltip(self)
 			local name = corruption[1]
 			local icon = corruption[2]
 			local line = '|T'..icon..':12:12:0:0|t '.."|cff956dd1"..name.."|r"
-			if CorruptionTooltips:Append(self, line) ~= true then
-                self:AddLine(" ")
-                self:AddLine(line)
+			if CorruptionTooltips:Append(tooltip, line) ~= true then
+                tooltip:AddLine(" ")
+                tooltip:AddLine(line)
 			end
 		end
 	end
@@ -116,7 +115,7 @@ end
 function CorruptionTooltips:SummaryHook(frame)
     if CorruptionTooltips.db.profile.summary then
         local corruptions = CorruptionTooltips:GetCorruptions()
-        if #corruptions > 1 then
+        if #corruptions > 0 then
             GameTooltip:AddLine(" ")
 
             local buckets = {}
