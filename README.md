@@ -20,7 +20,7 @@ Notice something that isn't right? Please raise an issue at [Github](https://git
 
 **Multilingual**
 
-The addon comes with support for all clients, but requires translations to position alongside the Corruption stat.
+The addon comes with support for all clients, but the options require translations.
 If you think you want to help with this, please create a pull request on [Github](https://github.com/suspectz/Corruption-Tooltips).
 
 **Thanks**
