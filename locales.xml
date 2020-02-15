@@ -2,4 +2,5 @@
     <Script file="Locales\enUS.lua"/>
     <Script file="Locales\zhCN.lua"/>
     <Script file="Locales\zhTW.lua"/>
+    <Script file="Locales\frFR.lua"/>
 </Ui>
