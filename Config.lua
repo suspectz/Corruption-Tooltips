@@ -16,6 +16,19 @@ local myOptions =
             end,
             get = function() return CorruptionTooltips.db.profile.append end,
             width = "full",
+            order = 10,
+        },
+        icon =
+        {
+            type = "toggle",
+            name = L["Show icon"],
+            desc = L["Show the spell icon along with the name."],
+            set = function(info, val)
+                CorruptionTooltips.db.profile.icon = val
+            end,
+            get = function() return CorruptionTooltips.db.profile.icon end,
+            width = "full",
+            order = 20,
         },
         summary =
         {
@@ -27,6 +40,7 @@ local myOptions =
             end,
             get = function() return CorruptionTooltips.db.profile.summary end,
             width = "full",
+            order = 30,
         },
         english =
         {
@@ -38,6 +52,7 @@ local myOptions =
             end,
             get = function() return CorruptionTooltips.db.profile.english end,
             width = "full",
+            order = 40,
         }
     },
 }
