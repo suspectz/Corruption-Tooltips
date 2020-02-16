@@ -14,6 +14,7 @@ externals:
   Libs/LibStub: https://repos.wowace.com/wow/libstub/tags/1.0
 
 ignore:
+  - README.md
   - screenshot.jpg
 
 manual-changelog:
