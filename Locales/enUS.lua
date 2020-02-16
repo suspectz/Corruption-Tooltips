@@ -5,7 +5,7 @@ L["I"] = "I"
 L["II"] = "II"
 L["III"] = "III"
 
---config
+-- Config
 L["Append to corruption stat"] = "Append to corruption stat"
 L["Use the new style tooltip."] = "Use the new style tooltip."
 L["Show summary on the corruption tooltip"] = "Show summary on the corruption tooltip"

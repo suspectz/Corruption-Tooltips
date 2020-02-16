@@ -1,3 +1,8 @@
+**1.6.4**
+
+- More translations.
+- Fix some mismatching of Corruptions.
+
 **1.6.3**
 
 - Add option to not show spell icon.
