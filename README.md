@@ -1,6 +1,6 @@
 What more is there to say, this is a simple tooltip addon that you can use to add the common name and rank for any applicable corruptions that apply to an item.
 
-![Tooltip Example](https://media.forgecdn.net/attachments/277/951/wowscrnshot_020620_232708.jpg)
+![Tooltip Example](/screenshot.jpg?raw=true)
 
 **Features:**
 
