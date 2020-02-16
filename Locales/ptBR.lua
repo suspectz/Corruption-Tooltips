@@ -1,11 +1,7 @@
 local L = LibStub("AceLocale-3.0"):NewLocale("CorruptionTooltips", "ptBR", true)
 if not L then return end
 
-L["I"] = "I"
-L["II"] = "II"
-L["III"] = "III"
-
---config
+-- Config
 L["Append to corruption stat"] = "Anexar no atributo de Corrupção."
 L["Use the new style tooltip."] = "Usar o novo estilo de dicas de ferramenta."
 L["Show summary on the corruption tooltip"] = "Mostrar sumário na dica de ferramenta de Corrupção."
