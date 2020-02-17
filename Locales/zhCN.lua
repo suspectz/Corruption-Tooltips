@@ -12,3 +12,5 @@ L["Show summary on the corruption tooltip"] = "在鼠标提示中列出腐蚀特
 L["List your corruptions in the eye tooltip in the character screen."] = "在角色界面的腐化值鼠标提示中，列出你的腐蚀特效。"
 L["Display in English"] = "显示英语腐化特效名称"
 L["Don't translate the corruption effect names."] = "不要使用本地化的腐化特效名称。"
+L["Show icon"] = "显示图标"
+L["Show the spell icon along with the name."] = "在腐化特效名称前显示其图标。"
