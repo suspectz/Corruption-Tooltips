@@ -1,3 +1,8 @@
+**1.6.5**
+
+- More translations.
+- Attempt to fix koKR positioning.
+
 **1.6.4**
 
 - More translations.

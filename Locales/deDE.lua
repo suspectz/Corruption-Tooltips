@@ -1,10 +1,6 @@
 local L = LibStub("AceLocale-3.0"):NewLocale("CorruptionTooltips", "deDE", true)
 if not L then return end
 
-L["I"] = "I"
-L["II"] = "II"
-L["III"] = "III"
-
 -- Config
 L["Append to corruption stat"] = "Hinzufügen zum Verderbnis-Wert"
 L["Use the new style tooltip."] = "Benutze neuen Style für den Tooltip."

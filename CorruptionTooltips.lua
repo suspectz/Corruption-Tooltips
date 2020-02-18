@@ -97,13 +97,12 @@ end
 
 function CorruptionTooltips:Append(tooltip, line)
     if CorruptionTooltips.db.profile.append then
-        local detected
         for i = 1, tooltip:NumLines() do
             local left = _G[tooltip:GetName().."TextLeft"..i]
             local text = left:GetText()
-            if text ~= nil and strsub(text, 1, 1) == "+" then
-                detected = string.find(text, ITEM_MOD_CORRUPTION)
-                if detected ~= nil then
+            if (text ~= nil) then
+                local detected = string.find(text, ITEM_MOD_CORRUPTION)
+                if (detected ~= nil and ((strsub(text, 1, 1) == "+") or (GetLocale() == "koKR"))) then
                     left:SetText(left:GetText().." / "..line)
                     return true
                 end
