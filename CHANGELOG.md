@@ -1,3 +1,8 @@
+**1.6.6**
+
+- Fix translation loading, more translated content.
+- Add a lookup table to supplement EncounterJournal tooltips. This may not be correct, please report bugs!
+
 **1.6.5**
 
 - More translations.

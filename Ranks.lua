@@ -60,3 +60,19 @@ addon.R = {
     ["6570"] = {"Flash of Insight", "", 318299},
     ["6569"] = {"Lash of the Void", "", 317290},
 }
+
+-- fixed weapon bonuses for EJ
+addon.W = {
+    ["172199"] = "6571", -- Faralos, Empire's Dream
+    ["172200"] = "6572", -- Sk'shuul Vaz
+    ["172191"] = "6567", -- An'zig Vra
+    ["172193"] = "6568", -- Whispering Eldritch Bow
+    ["172198"] = "6570", -- Mar'kowa, the Mindpiercer
+    ["172197"] = "6569", -- Unguent Caress
+    ["172227"] = "6544", -- Shard of the Black Empire
+    ["172196"] = "6541", -- Vorzz Yoq'al
+    ["174106"] = "6550", -- Qwor N'lyeth
+    ["172189"] = "6548", -- Eyestalk of Il'gynoth
+    ["174108"] = "6553", -- Shgla'yos, Astral Malignity
+    ["172187"] = "6539", -- Devastation's Hour
+}

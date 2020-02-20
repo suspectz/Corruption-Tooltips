@@ -1,5 +1,6 @@
 local addonName, addon = ...
 local R = addon.R
+local W = addon.W
 local L = LibStub("AceLocale-3.0"):GetLocale("CorruptionTooltips")
 
 CorruptionTooltips = LibStub("AceAddon-3.0"):NewAddon("CorruptionTooltips", "AceEvent-3.0", "AceConsole-3.0", "AceHook-3.0")
@@ -52,6 +53,14 @@ function CorruptionTooltips:CreateTooltip(tooltip)
 
         for index=1, itemSplit[13] do
             bonuses[#bonuses + 1] = itemSplit[13 + index]
+        end
+
+        -- local lookup for items without bonuses, like in the EJ
+        if itemSplit[13] == 1 then
+            local itemID = tostring(itemSplit[1])
+            if W[itemID] ~= nil then
+                bonuses[#bonuses + 1] = W[itemID]
+            end
         end
 
 		local corruption = CorruptionTooltips:GetCorruption(bonuses)
