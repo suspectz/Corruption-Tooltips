@@ -1,6 +1,7 @@
 **1.7**
 
 - Feature: Show corruption level against item in character screen.
+- Fix DE translations, thanks mauricepape.
 
 **1.6.6**
 
