@@ -48,9 +48,9 @@ local myOptions =
             name = L["Show corruption amount in the character screen"],
             desc = L["Show corruption stat on each corrupted item in the character screen."],
             set = function(info, val)
-                CorruptionTooltips.db.profile.itemlevel = val
+                CorruptionTooltips.db.profile.showlevel = val
             end,
-            get = function() return CorruptionTooltips.db.profile.itemlevel end,
+            get = function() return CorruptionTooltips.db.profile.showlevel end,
             width = "full",
             order = 40,
         },

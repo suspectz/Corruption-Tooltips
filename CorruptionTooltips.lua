@@ -11,7 +11,7 @@ local defaults = {
         append = true,
         icon = true,
         summary = true,
-        itemlevel = true,
+        showlevel = false,
         english = false,
     }
 }
@@ -297,7 +297,7 @@ end
 function CorruptionTooltips:UpdateCharacterFrame(frame, unit, slotId)
     if unit and slotId <= #slotNames then
         local itemLink = GetInventoryItemLink(unit, slotId)
-        if CorruptionTooltips.db.profile.itemlevel == true and itemLink then
+        if CorruptionTooltips.db.profile.showlevel == true and itemLink then
             if IsCorruptedItem(itemLink) and CharacterStatsPane.ItemLevelFrame.Corruption.tooltipShowing then
                 local item = Item:CreateFromItemLink(itemLink)
                 item:ContinueOnItemLoad(function()
