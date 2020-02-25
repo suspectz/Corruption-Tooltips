@@ -1,11 +1,15 @@
+**1.7**
+
+- Feature: Show corruption level against item in character screen.
+
 **1.6.6**
 
-- Fix translation loading, more translated content.
+- Fix translation loading, more translated content, thanks RainmakerUA.
 - Add a lookup table to supplement EncounterJournal tooltips. This may not be correct, please report bugs!
 
 **1.6.5**
 
-- More translations.
+- More translations, thanks LiangYuxuan, behhNa and Hubbotu.
 - Attempt to fix koKR positioning.
 
 **1.6.4**
