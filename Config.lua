@@ -46,7 +46,7 @@ local myOptions =
         {
             type = "toggle",
             name = L["Show corruption amount in the character screen"],
-            desc = L["Show corruption stat on each corrupted item in the character screen."],
+            desc = L["Show corruption stat on items in the character screen when displaying the corruption tooltip."],
             set = function(info, val)
                 CorruptionTooltips.db.profile.showlevel = val
             end,

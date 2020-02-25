@@ -15,4 +15,4 @@ L["Don't translate the corruption effect names."] = "Don't translate the corrupt
 L["Show icon"] = "Show icon"
 L["Show the spell icon along with the name."] = "Show the spell icon along with the name."
 L["Show corruption amount in the character screen"] = "Show corruption amount in the character screen"
-L["Show corruption stat on each corrupted item in the character screen."] = "Show corruption stat on each corrupted item in the character screen."
+L["Show corruption stat on items in the character screen when displaying the corruption tooltip."] = "Show corruption stat on items in the character screen when displaying the corruption tooltip."
