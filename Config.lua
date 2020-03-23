@@ -1,5 +1,18 @@
 local L = LibStub("AceLocale-3.0"):GetLocale("CorruptionTooltips")
 
+StaticPopupDialogs["ReloadUI_Popup"] = {
+    text = "Reload UI to apply changes?",
+    button1 = "Reload",
+    button2 = "Later",
+    OnAccept = function()
+        ReloadUI()
+    end,
+    timeout = 0,
+    whileDead = true,
+    hideOnEscape = true,
+    preferredIndex = 3,
+}
+
 local myOptions =
 {
     name = "Corruption Tooltips",
@@ -54,6 +67,19 @@ local myOptions =
             width = "full",
             order = 40,
         },
+        itemicon =
+        {
+            type = "toggle",
+            name = L["Show corruption icon atop of item in character screen and bags"],
+            desc = L["Show corruption icon atop of item in character screen and bags."],
+            set = function(info, val)
+                StaticPopup_Show("ReloadUI_Popup")  -- is's easier to reload UI to clear all frames and do less in hook functions
+                CorruptionTooltips.db.profile.itemicon = val
+            end,
+            get = function() return CorruptionTooltips.db.profile.itemicon end,
+            width = "full",
+            order = 50,
+        },
         english =
         {
             type = "toggle",
@@ -64,7 +90,7 @@ local myOptions =
             end,
             get = function() return CorruptionTooltips.db.profile.english end,
             width = "full",
-            order = 50,
+            order = 60,
         }
     },
 }

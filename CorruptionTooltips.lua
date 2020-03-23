@@ -12,6 +12,7 @@ local defaults = {
         icon = true,
         summary = true,
         showlevel = false,
+        itemicon = true,
         english = false,
     }
 }
@@ -59,6 +60,7 @@ function CorruptionTooltips:OnLoad(event, ...)
         self:UnregisterEvent(event)
         I = CreateFrame("Frame", nil, _G.InspectPaperDollFrame)
         CorruptionTooltips:SetupCharacterFrame(I)
+        CorruptionTooltips_AddHookInspectUI()
     end
 end
 
@@ -313,3 +315,200 @@ function CorruptionTooltips:UpdateCharacterFrame(frame, unit, slotId)
         frame[slotId].string:SetFormattedText("")
     end
 end
+
+
+--[[
+    Corruption Icons on Item buttons
+]]
+local function GetCorruptionBonus(itemLink)  -- helper function, duplocate code, should be refactored
+    local itemSplit = GetItemSplit(itemLink)
+    local bonuses = {}
+
+    for index=1, itemSplit[13] do
+        bonuses[#bonuses + 1] = itemSplit[13 + index]
+    end
+
+    -- local lookup for items without bonuses, like in the EJ
+    if itemSplit[13] == 1 then
+        local itemID = tostring(itemSplit[1])
+        if W[itemID] ~= nil then
+            bonuses[#bonuses + 1] = W[itemID]
+        end
+    end
+
+    local corruption = CorruptionTooltips:GetCorruption(bonuses)
+
+    if corruption then
+        local name = corruption[1]
+        local icon = corruption[2]
+        return name, icon
+    end
+end
+
+local function CreateCorruptionIcon(button, icon)
+    if not button.corruption then
+        button.corruption = CreateFrame("Frame", "$parent.corruption", button);
+        button.corruption:SetPoint("BOTTOMLEFT", button, "BOTTOMLEFT")
+        button.corruption:SetSize(37, 18)
+    else
+        button.corruption:ClearAllPoints()
+        button.corruption:SetPoint("BOTTOMLEFT", button, "BOTTOMLEFT")
+        button.corruption:Show()
+    end
+    if not button.corruption.icon then
+        -- Icon
+        button.corruption.icon = button.corruption:CreateTexture("CorruptionIcon", "OVERLAY", button.corruption)
+        button.corruption.icon:SetPoint("BOTTOMLEFT", button, "BOTTOMLEFT")
+        button.corruption.icon:SetSize(16, 16)
+        button.corruption.icon:SetTexture(icon)
+        -- Glow Border
+        button.corruption.icon.overlay = button.corruption:CreateTexture(nil, "ARTWORK", nil, 7)
+        button.corruption.icon.overlay:SetTexture([[Interface\TargetingFrame\UI-TargetingFrame-Stealable]])
+        button.corruption.icon.overlay:SetVertexColor(1.0,0.0,0.0,0.8)
+        button.corruption.icon.overlay:SetPoint("TOPLEFT", button.corruption.icon, -3, 3)
+        button.corruption.icon.overlay:SetPoint("BOTTOMRIGHT", button.corruption.icon, 3, -3)
+        button.corruption.icon.overlay:SetBlendMode("ADD")
+    else
+        button.corruption.icon:ClearAllPoints()
+        button.corruption.icon:SetPoint("BOTTOMLEFT", button, "BOTTOMLEFT")
+        button.corruption.icon:SetTexture(icon)
+    end
+end
+
+local function AddNzothIconOverlay(button)
+    button.IconOverlay:SetAtlas("Nzoth-inventory-icon");
+    button.IconOverlay:Show();
+end
+
+local function SetPaperDollCorruption(button, unit)
+    local slotId = button:GetID()
+    local textureName = GetInventoryItemTexture(unit, slotId);
+    local hasItem = textureName ~= nil;
+
+    if hasItem then
+        local itemLink = GetInventoryItemLink(unit, slotId)
+        if (itemLink) then
+            if IsCorruptedItem(itemLink) then
+                _, icon = GetCorruptionBonus(itemLink)
+                CreateCorruptionIcon(button, icon)
+                AddNzothIconOverlay(button)
+            else
+                if button.corruption then
+                    button.corruption:Hide()
+                end
+            end
+        end
+    else
+        if button.corruption then
+            button.corruption:Hide()
+        end
+    end
+end
+
+
+local function SetEquipmentFlyoutCorruption(button)
+    if button.corruption then
+        button.corruption:Hide()
+    end
+
+    if ( not button.location ) then
+        return;
+    end
+
+    if ( button.location >= EQUIPMENTFLYOUT_FIRST_SPECIAL_LOCATION ) then
+        return;
+    end
+
+    local _, _, _, _, slot, bag = EquipmentManager_UnpackLocation(button.location)
+    local itemLoc = ItemLocation:CreateFromBagAndSlot(bag, slot)
+
+    if not bag then return end
+
+    if not button then
+        return
+    end;
+
+    local itemLink = C_Item.GetItemLink(itemLoc)
+    if IsCorruptedItem(itemLink) then
+        _, icon = GetCorruptionBonus(itemLink)
+        CreateCorruptionIcon(button, icon)
+        AddNzothIconOverlay(button)
+    end
+end
+
+local function SetContainerButtonCorruption(button, bag)
+    if button.corruption then
+        button.corruption:Hide()
+    end
+
+    local slot = button:GetID()
+    local item = Item:CreateFromBagAndSlot(bag, slot)
+    if item:IsItemEmpty() then
+        return
+    end
+
+    -- item:ContinueOnItemLoad(function()
+        local itemLink = GetContainerItemLink(bag, slot)
+        if IsCorruptedItem(itemLink) then
+            _, icon = GetCorruptionBonus(itemLink)
+            CreateCorruptionIcon(button, icon)
+            AddNzothIconOverlay(button)
+        end
+    -- end)
+end
+
+local function SetLootCorruption(index)
+    local button = _G["LootButton"..index]
+    if button.corruption then
+        button.corruption:Hide()
+    end
+
+    local numLootToShow = LOOTFRAME_NUMBUTTONS
+    local slot = (numLootToShow * (LootFrame.page - 1)) + index
+    if (LootSlotHasItem(slot)) then
+        local itemLink = GetLootSlotLink(slot)
+        if IsCorruptedItem(itemLink) then
+            _, icon = GetCorruptionBonus(itemLink)
+            CreateCorruptionIcon(button, icon)
+        end
+    end
+end
+
+hooksecurefunc("PaperDollItemSlotButton_Update", function(button)
+    if not CorruptionTooltips.db.profile.itemicon then return end
+    SetPaperDollCorruption(button, "player")
+end)
+
+function CorruptionTooltips_AddHookInspectUI()
+    hooksecurefunc("InspectPaperDollItemSlotButton_Update", function(button)
+        if not CorruptionTooltips.db.profile.itemicon then return end
+        SetPaperDollCorruption(button, "target")
+    end)
+end
+
+hooksecurefunc("EquipmentFlyout_DisplayButton", function(button)
+    if not CorruptionTooltips.db.profile.itemicon then return end
+    SetEquipmentFlyoutCorruption(button)
+end)
+
+hooksecurefunc("ContainerFrame_Update", function(container)
+    if not CorruptionTooltips.db.profile.itemicon then return end
+    local bag = container:GetID()
+    local name = container:GetName()
+    for i = 1, container.size, 1 do
+        local button = _G[name .. "Item" .. i]
+        SetContainerButtonCorruption(button, bag)
+    end
+end)
+
+hooksecurefunc("BankFrameItemButton_Update", function(button)
+    if not CorruptionTooltips.db.profile.itemicon then return end
+    if not button.isBag then
+        SetContainerButtonCorruption(button, -1)
+    end
+end)
+
+hooksecurefunc("LootFrame_UpdateButton", function(index)
+    if not CorruptionTooltips.db.profile.itemicon then return end
+    SetLootCorruption(index)
+end)
