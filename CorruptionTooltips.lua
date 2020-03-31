@@ -467,7 +467,7 @@ local function SetLootCorruption(index)
     local slot = (numLootToShow * (LootFrame.page - 1)) + index
     if (LootSlotHasItem(slot)) then
         local itemLink = GetLootSlotLink(slot)
-        if IsCorruptedItem(itemLink) then
+        if itemLink and IsCorruptedItem(itemLink) then
             _, icon = GetCorruptionBonus(itemLink)
             CreateCorruptionIcon(button, icon)
         end
