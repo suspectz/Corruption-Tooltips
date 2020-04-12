@@ -1,3 +1,9 @@
+**1.8**
+
+- Feature: Show Corruption Icons on gear.
+- Feature: Better config layout, and allow saving settings per account.
+- Cleanups.
+
 **1.7**
 
 - Feature: Show corruption level against item in character screen.

@@ -1,4 +1,7 @@
+local addonName, addon = ...
+
 local L = LibStub("AceLocale-3.0"):GetLocale("CorruptionTooltips")
+local mediaPath = "Interface\\AddOns\\"..addonName.."\\Media\\"
 
 StaticPopupDialogs["ReloadUI_Popup"] = {
     text = "Reload UI to apply changes?",
@@ -15,7 +18,7 @@ StaticPopupDialogs["ReloadUI_Popup"] = {
 
 local myOptions =
 {
-    name = "Corruption Tooltips",
+    name = "|T"..mediaPath.."CT_logo:22:22:-1:7|tCorruption Tooltips",
     type = "group",
     args =
     {
