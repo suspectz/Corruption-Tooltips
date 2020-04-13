@@ -1,0 +1,1 @@
+CorruptionTooltips = LibStub("AceAddon-3.0"):NewAddon("CorruptionTooltips")

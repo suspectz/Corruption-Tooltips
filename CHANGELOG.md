@@ -2,7 +2,7 @@
 
 - Feature: Show Corruption Icons on gear.
 - Feature: Better config layout, and allow saving settings per account.
-- Cleanups.
+- Cleanup.
 
 **1.7**
 

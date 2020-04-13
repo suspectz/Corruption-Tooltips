@@ -7,4 +7,7 @@
 
 Libs\Libs.xml
 Locales\Locales.xml
-Core\Core.xml
+
+CorruptionTooltips.lua
+
+Modules\Modules.xml

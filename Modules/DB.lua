@@ -1,6 +1,7 @@
-local addonName, addon = ...
+local Addon = LibStub("AceAddon-3.0"):GetAddon("CorruptionTooltips")
+local Module = Addon:NewModule("DB")
 
-addon.R = {
+local bonuses = {
     ["6483"] = {"Avoidant", "I", 315607},
     ["6484"] = {"Avoidant", "II", 315608},
     ["6485"] = {"Avoidant", "III", 315609},
@@ -61,8 +62,7 @@ addon.R = {
     ["6569"] = {"Lash of the Void", "", 317290},
 }
 
--- fixed weapon bonuses for EJ
-addon.W = {
+local loot = { -- fixed loot bonuses for EncounterJournal
     ["172199"] = "6571", -- Faralos, Empire's Dream
     ["172200"] = "6572", -- Sk'shuul Vaz
     ["172191"] = "6567", -- An'zig Vra
@@ -76,3 +76,11 @@ addon.W = {
     ["174108"] = "6553", -- Shgla'yos, Astral Malignity
     ["172187"] = "6539", -- Devastation's Hour
 }
+
+function Module:GetBonus(bonusID)
+    return bonuses[bonusID]
+end
+
+function Module:GetLoot(itemID)
+    return loot[itemID]
+end
