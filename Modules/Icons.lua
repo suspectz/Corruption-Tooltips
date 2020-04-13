@@ -11,38 +11,43 @@ function Module:OnInitialize()
 end
 
 local function CreateCorruptionIcon(button, icon)
+    local position = Config:GetOption("iconposition")
     if not button.corruption then
         button.corruption = CreateFrame("Frame", "$parent.corruption", button);
-        button.corruption:SetPoint("BOTTOMLEFT", button, "BOTTOMLEFT")
+        button.corruption:SetPoint(position, button, position)
         button.corruption:SetSize(37, 18)
     else
         button.corruption:ClearAllPoints()
-        button.corruption:SetPoint("BOTTOMLEFT", button, "BOTTOMLEFT")
+        button.corruption:SetPoint(position, button, position)
         button.corruption:Show()
     end
+    local color = Config:GetOption("iconcolor")
     if not button.corruption.icon then
         -- Icon
         button.corruption.icon = button.corruption:CreateTexture("CorruptionIcon", "OVERLAY", button.corruption)
-        button.corruption.icon:SetPoint("BOTTOMLEFT", button, "BOTTOMLEFT")
+        button.corruption.icon:SetPoint(position, button, position)
         button.corruption.icon:SetSize(16, 16)
         button.corruption.icon:SetTexture(icon)
         -- Glow Border
         button.corruption.icon.overlay = button.corruption:CreateTexture(nil, "ARTWORK", nil, 7)
         button.corruption.icon.overlay:SetTexture([[Interface\TargetingFrame\UI-TargetingFrame-Stealable]])
-        button.corruption.icon.overlay:SetVertexColor(1.0,0.0,0.0,0.8)
+        button.corruption.icon.overlay:SetVertexColor(color["r"], color["g"], color["b"], color["a"])
         button.corruption.icon.overlay:SetPoint("TOPLEFT", button.corruption.icon, -3, 3)
         button.corruption.icon.overlay:SetPoint("BOTTOMRIGHT", button.corruption.icon, 3, -3)
         button.corruption.icon.overlay:SetBlendMode("ADD")
     else
         button.corruption.icon:ClearAllPoints()
-        button.corruption.icon:SetPoint("BOTTOMLEFT", button, "BOTTOMLEFT")
+        button.corruption.icon:SetPoint(position, button, position)
         button.corruption.icon:SetTexture(icon)
+        button.corruption.icon.overlay:SetVertexColor(color["r"], color["g"], color["b"], color["a"])
     end
 end
 
 local function AddNzothIconOverlay(button)
-    button.IconOverlay:SetAtlas("Nzoth-inventory-icon");
-    button.IconOverlay:Show();
+    if Config:GetOption("nzothlabel") ~= false then
+        button.IconOverlay:SetAtlas("Nzoth-inventory-icon");
+        button.IconOverlay:Show();
+    end
 end
 
 local function SetPaperDollCorruption(button, unit)

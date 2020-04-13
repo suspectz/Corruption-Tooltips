@@ -1,8 +1,16 @@
 local addonName, _ = ...
 local Addon = LibStub("AceAddon-3.0"):GetAddon("CorruptionTooltips")
 local Module = Addon:NewModule("Config", "AceConsole-3.0")
+local L = LibStub("AceLocale-3.0"):GetLocale("CorruptionTooltips")
 
 local db, version, author
+
+local anchors = {
+    ["TOPLEFT"] = L["Top Left"],
+    ["TOPRIGHT"] = L["Top Right"],
+    ["BOTTOMLEFT"] = L["Bottom Left"],
+    ["BOTTOMRIGHT"] = L["Bottom Right"],
+}
 
 local defaults = {
     global = {
@@ -192,8 +200,10 @@ local function AddConfig()
                         type = "toggle",
                         name = "Show nzoth label on all corrupted items",
                         desc = "",
-                        set = function(_, val) end,
-                        get = function() return true end,
+                        set = function(_, val)
+                            Module:SetOption("nzothlabel", val)
+                        end,
+                        get = function() return Module:GetOption("nzothlabel") end,
                         width = "full",
                         order = 10,
                     },
@@ -213,9 +223,11 @@ local function AddConfig()
                         type = "select",
                         name = "Icon Position",
                         desc = "",
-                        values = {},
-                        set = function(_, val) end,
-                        get = function() return "" end,
+                        values = anchors,
+                        set = function(_, val)
+                            Module:SetOption("iconposition", val)
+                        end,
+                        get = function() return Module:GetOption("iconposition") end,
                         order = 30,
                     },
                     iconcolor = {

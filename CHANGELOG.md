@@ -2,6 +2,7 @@
 
 - Feature: Show Corruption Icons on gear.
 - Feature: Better config layout, and allow saving settings per account.
+- Fix: Narcissus compatibility.
 - Cleanup.
 
 **1.7**
