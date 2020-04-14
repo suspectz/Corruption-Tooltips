@@ -2,4 +2,4 @@
 [x] Split out Corruption scanning into own module.
 [ ] Fix icons to be better sized, with position config.
 [ ] Bagnon/Adibags plugin to support icons.
-[ ] Fix corruption total?
+[x] Fix corruption total.

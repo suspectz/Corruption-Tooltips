@@ -1,7 +1,7 @@
 local Addon = LibStub("AceAddon-3.0"):GetAddon("CorruptionTooltips")
 local Module = Addon:NewModule("Icons", "AceEvent-3.0", "AceHook-3.0")
 
-local Config, Scanner
+local Config, Scanner, debounce
 
 function Module:OnInitialize()
     Config = Addon:GetModule("Config")
@@ -158,11 +158,11 @@ function Module:OnEnable()
         self:SecureHook("PaperDollItemSlotButton_Update", function(button)
             SetPaperDollCorruption(button, "player")
         end)
-        -- no idea?
+        -- wardrobe
         self:SecureHook("EquipmentFlyout_DisplayButton", function(button)
             SetEquipmentFlyoutCorruption(button)
         end)
-        -- bag?
+        -- bag
         self:SecureHook("ContainerFrame_Update", function(container)
             local bag = container:GetID()
             local name = container:GetName()
@@ -171,7 +171,7 @@ function Module:OnEnable()
                 SetContainerButtonCorruption(button, bag)
             end
         end)
-        -- bank?
+        -- bank
         self:SecureHook("BankFrameItemButton_Update", function(button)
             if not button.isBag then
                 SetContainerButtonCorruption(button, -1)
@@ -180,6 +180,20 @@ function Module:OnEnable()
         -- loot
         self:SecureHook("LootFrame_UpdateButton", function(index)
             SetLootCorruption(index)
+        end)
+        if IsAddOnLoaded("AdiBags") then
+            LibStub('ABEvent-1.0').RegisterMessage("CorruptionTooltips", "AdiBags_BagOpened", AdiBags_UpdateAfter)
+            LibStub('ABEvent-1.0').RegisterMessage("CorruptionTooltips", "AdiBags_ForceFullLayout", AdiBags_UpdateAfter)
+        end
+    end
+end
+
+function AdiBags_UpdateAfter()
+    if debounce ~= true then
+        debounce = true
+        C_Timer.After(.5, function()
+            debounce = false
+            print("bag opened") -- todo
         end)
     end
 end
