@@ -182,18 +182,47 @@ function Module:OnEnable()
             SetLootCorruption(index)
         end)
         if IsAddOnLoaded("AdiBags") then
-            LibStub('ABEvent-1.0').RegisterMessage("CorruptionTooltips", "AdiBags_BagOpened", AdiBags_UpdateAfter)
-            LibStub('ABEvent-1.0').RegisterMessage("CorruptionTooltips", "AdiBags_ForceFullLayout", AdiBags_UpdateAfter)
+            LibStub('ABEvent-1.0').RegisterMessage("CorruptionTooltips", "AdiBags_BagOpened", CT_AdiBags_UpdateAfter)
+            LibStub('ABEvent-1.0').RegisterMessage("CorruptionTooltips", "AdiBags_ForceFullLayout", CT_AdiBags_UpdateAfter)
         end
     end
 end
 
-function AdiBags_UpdateAfter()
+function CT_AdiBagsItemButton_CIMIUpdateIcon(button)
+    if not button then return end
+    local bag, slot = button.bag, button.slot
+    -- need to catch 0, 0 and 100, 0 here because the bank frame doesn't
+    -- load everything immediately, so the OnUpdate needs to run until those frames are opened.
+    if (bag == nil) or (slot == nil) or (bag == 0 and slot == 0) or (bag == 100 and slot == 0) then return end
+    local itemLoc = ItemLocation:CreateFromBagAndSlot(bag, slot)
+
+    if (not itemLoc:IsValid()) then return end
+
+    local itemLink = C_Item.GetItemLink(itemLoc)
+    if IsCorruptedItem(itemLink) then
+        local _, icon = Scanner:GetCorruptionByItemLink(itemLink)
+        CreateCorruptionIcon(button, icon)
+        AddNzothIconOverlay(button)
+    end
+end
+
+function CT_AdiBags_UpdateAfter()
     if debounce ~= true then
         debounce = true
         C_Timer.After(.5, function()
             debounce = false
-            print("bag opened") -- todo
+            for i=1,600 do
+                local frame = _G["AdiBagsItemButton"..i]
+                if frame then
+                    C_Timer.After(.5, function() CT_AdiBagsItemButton_CIMIUpdateIcon(frame) end)
+                end
+            end
+            for i=1,28 do
+                local frame = _G["AdiBagsBankItemButton"..i]
+                if frame then
+                    C_Timer.After(.5, function() CT_AdiBagsItemButton_CIMIUpdateIcon(frame) end)
+                end
+            end
         end)
     end
 end
