@@ -30,17 +30,25 @@ local defaults = {
             ["g"] = 0,
             ["b"] = 0,
             ["a"] = 0.8,
-        }
+        },
     },
 }
 
 local function ResetConfig()
-    -- todo: implement resetting config
+    db.global["perchar"] = true
+    db:RegisterDefaults(defaults)
+    db:ResetProfile()
+    LibStub("AceConfigRegistry-3.0"):NotifyChange("CorruptionTooltips")
+    StaticPopup_Show("CorruptionTooltips_ReloadPopup")
 end
 
 function Module:GetOption(option)
     if option ~= "perchar" then
-        return db.profile[option]
+        if db.global["perchar"] == true then
+            return db.profile[option]
+        else
+            return db.global[option]
+        end
     else
         return db.global["perchar"]
     end
@@ -48,9 +56,44 @@ end
 
 function Module:SetOption(option, val)
     if option ~= "perchar" then
-        db.profile[option] = val
+        if db.global["perchar"] == true then
+            db.profile[option] = val
+        else
+            db.global[option] = val
+        end
     else
         db.global[option] = val
+        if val == false then
+            -- copy profile values over global values
+            for k, v in pairs(db.profile) do
+                if k == "iconcolor" then
+                    db.global["iconcolor"] = {
+                        ["r"] = db.profile["iconcolor"]["r"],
+                        ["g"] = db.profile["iconcolor"]["g"],
+                        ["b"] = db.profile["iconcolor"]["b"],
+                        ["a"] = db.profile["iconcolor"]["a"],
+                    }
+                else
+                    db.global[k] = v
+                end
+            end
+        else
+            -- copy global values over profile values
+            for k, v in pairs(db.global) do
+                if k ~= "perchar" then
+                    if k == "iconcolor" then
+                        db.profile["iconcolor"] = {
+                            ["r"] = db.global["iconcolor"]["r"],
+                            ["g"] = db.global["iconcolor"]["g"],
+                            ["b"] = db.global["iconcolor"]["b"],
+                            ["a"] = db.global["iconcolor"]["a"],
+                        }
+                    else
+                        db.profile[k] = v
+                    end
+                end
+            end
+        end
     end
 end
 
