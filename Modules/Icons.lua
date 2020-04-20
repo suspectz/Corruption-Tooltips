@@ -185,6 +185,10 @@ function Module:OnEnable()
             LibStub('ABEvent-1.0').RegisterMessage("CorruptionTooltips", "AdiBags_BagOpened", CT_AdiBags_UpdateAfter)
             LibStub('ABEvent-1.0').RegisterMessage("CorruptionTooltips", "AdiBags_ForceFullLayout", CT_AdiBags_UpdateAfter)
         end
+        if IsAddOnLoaded("Bagnon") then
+            self:SecureHook(Bagnon.Item, "Update", CT_Bagnon_Update)
+            self:SecureHook(Bagnon.Item, "UpdateBorder", CT_Bagnon_UpdateBorder)
+        end
     end
 end
 
@@ -224,5 +228,32 @@ function CT_AdiBags_UpdateAfter()
                 end
             end
         end)
+    end
+end
+
+function CT_Bagnon_Update(button)
+    if not button then return end
+        local bag, slot = button:GetParent():GetID(), button:GetID()
+        -- need to catch 0, 0 and 100, 0 here because the bank frame doesn't
+        -- load everything immediately, so the OnUpdate needs to run until those frames are opened.
+        if (bag == nil) or (slot == nil) or (bag == 0 and slot == 0) or (bag == 100 and slot == 0) then return end
+        local itemLoc = ItemLocation:CreateFromBagAndSlot(bag, slot)
+
+        if (not itemLoc:IsValid()) then return end
+
+        local itemLink = C_Item.GetItemLink(itemLoc)
+        if IsCorruptedItem(itemLink) then
+            local _, icon = Scanner:GetCorruptionByItemLink(itemLink)
+            CreateCorruptionIcon(button, icon)
+            AddNzothIconOverlay(button)
+        end
+end
+
+function CT_Bagnon_UpdateBorder(button)
+    if not button.info.link then return end
+
+    local itemLink = button.info.link
+    if IsCorruptedItem(itemLink) then
+        button.IconOverlay:SetShown(true)
     end
 end
