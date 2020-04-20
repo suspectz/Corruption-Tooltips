@@ -11,3 +11,4 @@ Locales\Locales.xml
 CorruptionTooltips.lua
 
 Modules\Modules.xml
+Modules\Patches\Patches.xml

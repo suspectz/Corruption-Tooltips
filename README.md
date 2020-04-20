@@ -8,6 +8,8 @@ Icon, name and rank for all corrupted Item tooltips (characters, bags and banks)
  
 Ability to show Corruption in the client language, or in English.
 
+Ability to add Corruption icon on items (characters, bags and banks).
+
 See options using the `/ct` command.
 
 **Why do I need it?**

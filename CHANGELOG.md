@@ -1,8 +1,8 @@
 **1.8**
 
-- Feature: Show Corruption Icons on gear.
+- Feature: Show Corruption Icons on gear, thanks SlipCore.
 - Feature: Better config layout, and allow saving settings per account.
-- Fix: Narcissus, Adibags, and Bagnon compatibility.
+- Fix: Narcissus, Adibags, Bagnon, ElvUI, ArkInventory and LiteBag compatibility.
 - Cleanup.
 
 **1.7**

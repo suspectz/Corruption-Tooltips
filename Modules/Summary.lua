@@ -14,18 +14,8 @@ function Module:OnInitialize()
 end
 
 function Module:OnEnable()
-    if IsAddOnLoaded("Narcissus") then
-        self:SecureHook('PaperDollFrame_UpdateCorruptedItemGlows', function(enter)
-            if enter then
-                Module:SummaryEnter()
-            else
-                Module:SummaryLeave()
-            end
-        end)
-    else
-        self:SecureHookScript(CharacterStatsPane.ItemLevelFrame.Corruption, 'OnEnter', 'SummaryEnter')
-        self:SecureHookScript(CharacterStatsPane.ItemLevelFrame.Corruption, 'OnLeave', 'SummaryLeave')
-    end
+    self:SecureHookScript(CharacterStatsPane.ItemLevelFrame.Corruption, 'OnEnter', 'SummaryEnter')
+    self:SecureHookScript(CharacterStatsPane.ItemLevelFrame.Corruption, 'OnLeave', 'SummaryLeave')
 end
 
 function Module:OnLoad(event, ...)
