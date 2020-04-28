@@ -15,6 +15,7 @@ externals:
 
 ignore:
   - README.md
+  - TODO.md
   - screenshot.jpg
 
 manual-changelog:

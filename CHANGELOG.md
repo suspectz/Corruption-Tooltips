@@ -1,3 +1,10 @@
+**1.8.1**
+- Fix: Moving icons in bags no longer leaves behind a corruption icon.
+- Fix: Marked the N'Zoth icon setting as unavailable if you do not have icons in use and put the config in the correct order.
+- Fix: Inspection frame was ignoring item icon setting.
+- Update: Change the position/size of the item icon slightly to better position for ElvUI. 
+- Update: zwTW translations.
+
 **1.8**
 
 - Feature: Show Corruption Icons on gear, thanks SlipCore.

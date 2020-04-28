@@ -32,8 +32,8 @@ L["Show corruption stat on items in the character screen when displaying the cor
 
 -- Config (Icons)
 L["Icons"] = "Icons"
-L["Show N'Zoth label on all corrupted items"] = "Show N'Zoth label on all corrupted items"
 L["Show corruption icon atop of item in character screen and bags"] = "Показывать значок порчи поверх предмета в окне персонажа и сумках"
+L["Show N'Zoth label on all corrupted items"] = "Show N'Zoth label on all corrupted items"
 L["Icon border color"] = "Icon border color"
 L["Icon position"] = "Icon position"
 L["Bottom Left"] = "Bottom Left"

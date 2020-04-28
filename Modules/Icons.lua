@@ -12,6 +12,9 @@ end
 
 local function CreateCorruptionIcon(button, icon)
     local position = Config:GetOption("iconposition")
+    local iconsize = 12
+    local offset_x = 2
+    local offset_y = 2
     if not button.corruption then
         button.corruption = CreateFrame("Frame", "$parent.corruption", button);
         button.corruption:SetPoint(position, button, position)
@@ -25,8 +28,8 @@ local function CreateCorruptionIcon(button, icon)
     if not button.corruption.icon then
         -- Icon
         button.corruption.icon = button.corruption:CreateTexture("CorruptionIcon", "OVERLAY", button.corruption)
-        button.corruption.icon:SetPoint(position, button, position)
-        button.corruption.icon:SetSize(16, 16)
+        button.corruption.icon:SetPoint(position, button, position, offset_x, offset_y)
+        button.corruption.icon:SetSize(iconsize, iconsize)
         button.corruption.icon:SetTexture(icon)
         -- Glow Border
         button.corruption.icon.overlay = button.corruption:CreateTexture(nil, "ARTWORK", nil, 7)
@@ -37,7 +40,7 @@ local function CreateCorruptionIcon(button, icon)
         button.corruption.icon.overlay:SetBlendMode("ADD")
     else
         button.corruption.icon:ClearAllPoints()
-        button.corruption.icon:SetPoint(position, button, position)
+        button.corruption.icon:SetPoint(position, button, position, offset_x, offset_y)
         button.corruption.icon:SetTexture(icon)
         button.corruption.icon.overlay:SetVertexColor(color["r"], color["g"], color["b"], color["a"])
     end

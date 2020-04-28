@@ -21,7 +21,10 @@ function CorruptionTooltips_LiteBag_Update(button)
     if (bag == nil) or (slot == nil) or (bag == 0 and slot == 0) or (bag == 100 and slot == 0) then return end
     local itemLoc = ItemLocation:CreateFromBagAndSlot(bag, slot)
 
-    if (not itemLoc:IsValid()) then return end
+    if (not itemLoc:IsValid()) then
+        Icons:ClearIcon(button)
+        return
+    end
 
     local itemLink = C_Item.GetItemLink(itemLoc)
     Icons:ApplyIcon(button, itemLink)
