@@ -22,8 +22,8 @@ local defaults = {
         icon = true,
         summary = true,
         showlevel = false,
-        nzothlabel = true,
         itemicon = false,
+        nzothlabel = false,
         iconposition = "BOTTOMLEFT",
         iconcolor = {
             ["r"] = 1.0,
@@ -239,6 +239,21 @@ local function AddConfig()
                 guiInline = true,
                 order = 50,
                 args = {
+                    itemicon = {
+                        type = "toggle",
+                        name = L["Show corruption icon atop of item in character screen and bags"],
+                        desc = "",
+                        set = function(_, val)
+                            StaticPopup_Show("CorruptionTooltips_ReloadPopup")
+                            Module:SetOption("itemicon", val)
+                            if val == false then
+                                Module:SetOption("nzothlabel", false)
+                            end
+                        end,
+                        get = function() return Module:GetOption("itemicon") end,
+                        width = "full",
+                        order = 10,
+                    },
                     nzothlabel = {
                         type = "toggle",
                         name = L["Show N'Zoth label on all corrupted items"],
@@ -247,18 +262,9 @@ local function AddConfig()
                             Module:SetOption("nzothlabel", val)
                         end,
                         get = function() return Module:GetOption("nzothlabel") end,
-                        width = "full",
-                        order = 10,
-                    },
-                    itemicon = {
-                        type = "toggle",
-                        name = L["Show corruption icon atop of item in character screen and bags"],
-                        desc = "",
-                        set = function(_, val)
-                            StaticPopup_Show("CorruptionTooltips_ReloadPopup")
-                            Module:SetOption("itemicon", val)
+                        disabled = function()
+                            return not Module:GetOption("itemicon")
                         end,
-                        get = function() return Module:GetOption("itemicon") end,
                         width = "full",
                         order = 20,
                     },

@@ -175,9 +175,13 @@ function Module:ApplyIcon(button, itemLink)
         CreateCorruptionIcon(button, icon)
         AddNzothIconOverlay(button)
     else
-        if button.corruption then
-            button.corruption:Hide()
-        end
-        button.IconOverlay:Hide();
+        Module:ClearIcon(button)
     end
+end
+
+function Module:ClearIcon(button)
+    if button.corruption then
+        button.corruption:Hide()
+    end
+    button.IconOverlay:Hide();
 end
