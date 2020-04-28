@@ -141,15 +141,15 @@ local function AddConfig()
             },
             general = {
                 type = "group",
-                name = "General",
-                desc = "General",
+                name = L["General"],
+                desc = "",
                 guiInline = true,
                 order = 20,
                 args = {
                     perchar = {
                         type = "toggle",
-                        name = "Per-character configuration",
-                        desc = "Per-character configuration",
+                        name = L["Per-character configuration"],
+                        desc = "",
                         set = function(_, val)
                             Module:SetOption("perchar", val)
                         end,
@@ -173,7 +173,7 @@ local function AddConfig()
             tooltip = {
                 type = "group",
                 name = L["Item Tooltips"],
-                desc = L["Item Tooltips"],
+                desc = "",
                 guiInline = true,
                 order = 30,
                 args = {
@@ -204,7 +204,7 @@ local function AddConfig()
             summary = {
                 type = "group",
                 name = L["Summary"],
-                desc = L["Summary"],
+                desc = "",
                 guiInline = true,
                 order = 40,
                 args = {
@@ -235,13 +235,13 @@ local function AddConfig()
             icons = {
                 type = "group",
                 name = L["Icons"],
-                desc = L["Icons"],
+                desc = "",
                 guiInline = true,
                 order = 50,
                 args = {
                     nzothlabel = {
                         type = "toggle",
-                        name = "Show nzoth label on all corrupted items",
+                        name = L["Show N'Zoth label on all corrupted items"],
                         desc = "",
                         set = function(_, val)
                             Module:SetOption("nzothlabel", val)
@@ -253,7 +253,7 @@ local function AddConfig()
                     itemicon = {
                         type = "toggle",
                         name = L["Show corruption icon atop of item in character screen and bags"],
-                        desc = L["Show corruption icon atop of item in character screen and bags."],
+                        desc = "",
                         set = function(_, val)
                             StaticPopup_Show("CorruptionTooltips_ReloadPopup")
                             Module:SetOption("itemicon", val)
@@ -264,7 +264,7 @@ local function AddConfig()
                     },
                     iconposition = {
                         type = "select",
-                        name = "Icon Position",
+                        name = L["Icon position"],
                         desc = "",
                         values = anchors,
                         set = function(_, val)
@@ -275,7 +275,7 @@ local function AddConfig()
                     },
                     iconcolor = {
                         type = "color",
-                        name = "Icon border color",
+                        name = L["Icon border color"],
                         desc = "",
                         hasAlpha = false,
                         set = function(_, r, g, b, a)

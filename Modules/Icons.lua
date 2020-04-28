@@ -174,5 +174,10 @@ function Module:ApplyIcon(button, itemLink)
         local _, icon = Scanner:GetCorruptionByItemLink(itemLink)
         CreateCorruptionIcon(button, icon)
         AddNzothIconOverlay(button)
+    else
+        if button.corruption then
+            button.corruption:Hide()
+        end
+        button.IconOverlay:Hide();
     end
 end
