@@ -107,6 +107,11 @@ local function SetContainerButtonCorruption(button, bag)
         button.corruption:Hide()
     end
 
+    -- ignore reagent bank tab
+    if (bag == BANK_CONTAINER and _G.BankFrame.selectedTab == 2) then
+        return
+    end
+
     local slot = button:GetID()
     local item = Item:CreateFromBagAndSlot(bag, slot)
     if item:IsItemEmpty() then
@@ -164,7 +169,7 @@ function Module:OnEnable()
         -- bank
         self:SecureHook("BankFrameItemButton_Update", function(button)
             if not button.isBag then
-                SetContainerButtonCorruption(button, -1)
+                SetContainerButtonCorruption(button, BANK_CONTAINER)
             end
         end)
         -- loot
