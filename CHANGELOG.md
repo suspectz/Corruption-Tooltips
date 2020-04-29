@@ -2,6 +2,7 @@
 - Fix: Moving icons in bags no longer leaves behind a corruption icon.
 - Fix: Marked the N'Zoth icon setting as unavailable if you do not have icons in use and put the config in the correct order.
 - Fix: Inspection frame was ignoring item icon setting.
+- Fix: Change logic for clearing IconOverlay that could have resulted in removing the Azerite icon overlay.
 - Update: Change the position/size of the item icon slightly to better position for ElvUI. 
 - Update: zwTW translations.
 

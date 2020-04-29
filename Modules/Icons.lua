@@ -60,15 +60,7 @@ local function SetPaperDollCorruption(button, unit)
 
     if hasItem then
         local itemLink = GetInventoryItemLink(unit, slotId)
-        if (itemLink) then
-            if IsCorruptedItem(itemLink) then
-                Module:ApplyIcon(button, itemLink)
-            else
-                if button.corruption then
-                    button.corruption:Hide()
-                end
-            end
-        end
+        Module:ApplyIcon(button, itemLink)
     else
         if button.corruption then
             button.corruption:Hide()
@@ -180,12 +172,16 @@ function Module:OnEnable()
 end
 
 function Module:ApplyIcon(button, itemLink)
-    if itemLink and IsCorruptedItem(itemLink) then
-        local _, icon = Scanner:GetCorruptionByItemLink(itemLink)
-        CreateCorruptionIcon(button, icon)
-        AddNzothIconOverlay(button)
-    else
-        Module:ClearIcon(button)
+    if itemLink then
+        if IsCorruptedItem(itemLink) then
+            local _, icon = Scanner:GetCorruptionByItemLink(itemLink)
+            CreateCorruptionIcon(button, icon)
+            AddNzothIconOverlay(button)
+        else
+            if button.corruption then
+                button.corruption:Hide()
+            end
+        end
     end
 end
 
