@@ -146,7 +146,7 @@ function Module:OnLoad(event, ...)
         self:UnregisterEvent(event)
         if Config:GetOption("itemicon") ~= false then
             self:SecureHook("InspectPaperDollItemSlotButton_Update", function(button)
-                SetPaperDollCorruption(button, "target")
+                SetPaperDollCorruption(button, InspectFrame.unit)
             end)
         end
     end
