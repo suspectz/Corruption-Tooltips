@@ -1,3 +1,8 @@
+**1.8.2**
+- Fix: Correct item icon offsets for alternative positions.
+- Fix: Inspecting players show corruptions as expected, thanks SlipCore.
+- Update: ruRU translation, thanks SlipCore.
+
 **1.8.1**
 - Fix: Moving icons in bags no longer leaves behind a corruption icon.
 - Fix: Marked the N'Zoth icon setting as unavailable if you do not have icons in use and put the config in the correct order.
@@ -5,6 +10,7 @@
 - Fix: Change logic for clearing IconOverlay that could have resulted in removing the Azerite icon overlay.
 - Update: Change the position/size of the item icon slightly to better position for ElvUI. 
 - Update: zwTW translations.
+- Update: zhCN translations.
 
 **1.8**
 
