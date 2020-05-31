@@ -31,20 +31,22 @@ function Module:OnInitialize()
     DB = Addon:GetModule("DB")
 end
 
-local function GetItemSplit(itemLink)
-  local itemString = string.match(itemLink, "item:([%-?%d:]+)")
-  local itemSplit = {}
+function Module:GetItemSplit(itemLink)
+    local itemString = string.match(itemLink, "item:([%-?%d:]+)")
+    local itemSplit = {}
 
-  -- Split data into a table
-  for _, v in ipairs({strsplit(":", itemString)}) do
-    if v == "" then
-      itemSplit[#itemSplit + 1] = 0
-    else
-      itemSplit[#itemSplit + 1] = tonumber(v)
+    if itemString ~= nil then
+        -- Split data into a table
+        for _, v in ipairs({strsplit(":", itemString)}) do
+            if v == "" then
+                itemSplit[#itemSplit + 1] = 0
+            else
+                itemSplit[#itemSplit + 1] = tonumber(v)
+            end
+        end
     end
-  end
 
-  return itemSplit
+    return itemSplit
 end
 
 local function GetCorruption(bonuses)
@@ -72,7 +74,7 @@ local function GetCorruption(bonuses)
 end
 
 function Module:GetCorruptionByItemLink(itemLink)
-    local itemSplit = GetItemSplit(itemLink)
+    local itemSplit = self:GetItemSplit(itemLink)
     local bonuses = {}
 
     for index=1, itemSplit[13] do
@@ -91,13 +93,32 @@ function Module:GetCorruptionByItemLink(itemLink)
     return GetCorruption(bonuses)
 end
 
+function Module:GetCorruptionByID(bonusID)
+    local corruption = DB:GetBonus(bonusID)
+    if corruption ~= nil then
+        local rank
+        local name, _, icon, _, _, _ = GetSpellInfo(corruption[3])
+        if corruption[2] ~= "" then
+            rank = L[corruption[2]]
+        else
+            rank = ""
+        end
+        if Config:GetOption("english") ~= false then
+            name = corruption[1]
+            rank = corruption[2]
+        end
+
+        return name.." "..rank, icon
+    end
+end
+
 function Module:GetCharacterCorruptions()
     local corruptions = {}
     for slotNum=1, #slotNames do
         local slotId = GetInventorySlotInfo(slotNames[slotNum])
         local itemLink = GetInventoryItemLink('player', slotId)
         if itemLink then
-            local itemSplit = GetItemSplit(itemLink)
+            local itemSplit = self:GetItemSplit(itemLink)
             local bonuses = {}
 
             for index=1, itemSplit[13] do

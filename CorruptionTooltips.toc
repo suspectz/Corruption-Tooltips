@@ -2,7 +2,7 @@
 ## Title: Corruption Tooltips
 ## Author: suspectz (Anayanka - Defias Brotherhood - EU)
 ## Notes: Simple addon to show name and level of corruption on item tooltips.
-## Version: 1.8.2
+## Version: 1.8.3
 ## SavedVariables: CorruptionTooltipsDB
 
 Libs\Libs.xml

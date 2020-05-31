@@ -1,3 +1,6 @@
+**1.8.3**
+- Feature: MOTHER items now have added tooltip info.
+
 **1.8.2**
 - Fix: Correct item icon offsets for alternative positions.
 - Fix: Inspecting players show corruptions as expected, thanks SlipCore.
