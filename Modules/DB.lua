@@ -119,7 +119,9 @@ local purchaseable = {
     ["177985"] = "6554", -- Preserved Containment: Infinite Stars III
     ["177981"] = "6547", -- Preserved Containment: Ineffable Truth I
     ["177982"] = "6548", -- Preserved Containment: Ineffable Truth II
-
+    ["178004"] = "6537", -- Preserved Containment: Twilight Devastation I
+    ["178005"] = "6538", -- Preserved Containment: Twilight Devastation II
+    ["178006"] = "6539", -- Preserved Containment: Twilight Devastation III
     ["178007"] = "6543", -- Preserved Containment: Twisted Appendage I
     ["178008"] = "6544", -- Preserved Containment: Twisted Appendage II
     ["178009"] = "6545", -- Preserved Containment: Twisted Appendage III
