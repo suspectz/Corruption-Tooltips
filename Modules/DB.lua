@@ -133,13 +133,13 @@ local purchaseable = {
 }
 
 function Module:GetBonus(bonusID)
-    return bonuses[bonusID]
+    return bonuses[tostring(bonusID)]
 end
 
 function Module:GetLoot(itemID)
-    return loot[itemID]
+    return loot[tostring(itemID)]
 end
 
 function Module:GetPurchasable(itemID)
-    return purchaseable[itemID]
+    return purchaseable[tostring(itemID)]
 end

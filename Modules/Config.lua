@@ -23,6 +23,7 @@ local defaults = {
         summary = true,
         showlevel = false,
         itemicon = false,
+        itemrank = false,
         nzothlabel = false,
         iconposition = "BOTTOMLEFT",
         iconcolor = {
@@ -99,7 +100,6 @@ end
 
 local function AddConfig()
     local mediaPath = "Interface\\AddOns\\"..addonName.."\\Media\\"
-    local L = LibStub("AceLocale-3.0"):GetLocale("CorruptionTooltips")
 
     -- is's easier to reload UI to clear all frames and do less in hook functions
     StaticPopupDialogs["CorruptionTooltips_ReloadPopup"] = {
@@ -254,6 +254,20 @@ local function AddConfig()
                         width = "full",
                         order = 10,
                     },
+                    itemrank = {
+                        type = "toggle",
+                        name = L["Show corruption rank with icons"],
+                        desc = "",
+                        set = function(_, val)
+                            Module:SetOption("itemrank", val)
+                        end,
+                        get = function() return Module:GetOption("itemrank") end,
+                        disabled = function()
+                            return not Module:GetOption("itemicon")
+                        end,
+                        width = "full",
+                        order = 20,
+                    },
                     nzothlabel = {
                         type = "toggle",
                         name = L["Show N'Zoth label on all corrupted items"],
@@ -266,7 +280,7 @@ local function AddConfig()
                             return not Module:GetOption("itemicon")
                         end,
                         width = "full",
-                        order = 20,
+                        order = 30,
                     },
                     iconposition = {
                         type = "select",
@@ -277,7 +291,7 @@ local function AddConfig()
                             Module:SetOption("iconposition", val)
                         end,
                         get = function() return Module:GetOption("iconposition") end,
-                        order = 30,
+                        order = 40,
                     },
                     iconcolor = {
                         type = "color",
@@ -292,7 +306,7 @@ local function AddConfig()
                             return color["r"], color["g"], color["b"], color["a"]
                         end,
                         width = "full",
-                        order = 30,
+                        order = 50,
                     }
                 },
             },

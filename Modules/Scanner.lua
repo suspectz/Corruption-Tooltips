@@ -26,6 +26,25 @@ local slotNames = {
     "AmmoSlot" -- [19]
 }
 
+local function GetCorruptionByID(bonusID)
+    local corruption = DB:GetBonus(bonusID)
+    if corruption ~= nil then
+        local rank
+        local name, _, icon, _, _, _ = GetSpellInfo(corruption[3])
+        if corruption[2] ~= "" then
+            rank = L[corruption[2]]
+        else
+            rank = ""
+        end
+        if Config:GetOption("english") ~= false then
+            name = corruption[1]
+            rank = corruption[2]
+        end
+
+        return name.." "..rank, icon, rank
+    end
+end
+
 function Module:OnInitialize()
     Config = Addon:GetModule("Config")
     DB = Addon:GetModule("DB")
@@ -49,66 +68,38 @@ function Module:GetItemSplit(itemLink)
     return itemSplit
 end
 
-local function GetCorruption(bonuses)
-    if #bonuses > 0 then
-        for _, bonusID in pairs(bonuses) do
-            bonusID = tostring(bonusID)
-            local corruption = DB:GetBonus(bonusID)
-            if corruption ~= nil then
-                local rank
-                local name, _, icon, _, _, _ = GetSpellInfo(corruption[3])
-                if corruption[2] ~= "" then
-                    rank = L[corruption[2]]
-                else
-                    rank = ""
-                end
-                if Config:GetOption("english") ~= false then
-                    name = corruption[1]
-                    rank = corruption[2]
-                end
-
-                return name.." "..rank, icon
-            end
-        end
-    end
-end
-
 function Module:GetCorruptionByItemLink(itemLink)
     local itemSplit = self:GetItemSplit(itemLink)
     local bonuses = {}
 
-    for index=1, itemSplit[13] do
-        bonuses[#bonuses + 1] = itemSplit[13 + index]
-    end
+    if IsCorruptedItem(itemLink) then
+        for index=1, itemSplit[13] do
+            bonuses[#bonuses + 1] = itemSplit[13 + index]
+        end
 
-    -- if the item is in the EncounterJournal, add in the missing bonus
-    if itemSplit[13] == 1 then
-        local itemID = tostring(itemSplit[1])
-        local lootBonus = DB:GetLoot(itemID)
-        if lootBonus ~= nil then
-            bonuses[#bonuses + 1] = lootBonus
+        -- if the item is in the EncounterJournal, add in the missing bonus
+        if itemSplit[13] == 1 then
+            local itemID = itemSplit[1]
+            local lootBonus = DB:GetLoot(itemID)
+            if lootBonus ~= nil then
+                bonuses[#bonuses + 1] = lootBonus
+            end
+        end
+    else
+        local itemID = itemSplit[1]
+        local purchasable = DB:GetPurchasable(itemID)
+        if purchasable ~= nil then
+            bonuses[#bonuses + 1] = purchasable
         end
     end
 
-    return GetCorruption(bonuses)
-end
-
-function Module:GetCorruptionByID(bonusID)
-    local corruption = DB:GetBonus(bonusID)
-    if corruption ~= nil then
-        local rank
-        local name, _, icon, _, _, _ = GetSpellInfo(corruption[3])
-        if corruption[2] ~= "" then
-            rank = L[corruption[2]]
-        else
-            rank = ""
+    if #bonuses > 0 then
+        for _, bonusID in pairs(bonuses) do
+            local name, icon, rank = GetCorruptionByID(bonusID)
+            if name ~= nil then
+                return name, icon, rank
+            end
         end
-        if Config:GetOption("english") ~= false then
-            name = corruption[1]
-            rank = corruption[2]
-        end
-
-        return name.." "..rank, icon
     end
 end
 
@@ -118,14 +109,7 @@ function Module:GetCharacterCorruptions()
         local slotId = GetInventorySlotInfo(slotNames[slotNum])
         local itemLink = GetInventoryItemLink('player', slotId)
         if itemLink then
-            local itemSplit = self:GetItemSplit(itemLink)
-            local bonuses = {}
-
-            for index=1, itemSplit[13] do
-                bonuses[#bonuses + 1] = itemSplit[13 + index]
-            end
-
-            local name, icon = GetCorruption(bonuses)
+            local name, icon, _ = self:GetCorruptionByItemLink(itemLink)
             if name ~= nil then
                 corruptions[#corruptions + 1] = { name, icon }
             end

@@ -33,6 +33,7 @@ L["Show corruption stat on items in the character screen when displaying the cor
 -- Config (Icons)
 L["Icons"] = "圖示"
 L["Show corruption icon atop of item in character screen and bags"] = "在角色視窗和背包中物品的上方顯示腐化圖示"
+L["Show corruption rank with icons"] = "Show corruption rank with icons"
 L["Show N'Zoth label on all corrupted items"] = "在所有腐化物品上顯示恩若司標誌"
 L["Icon border color"] = "圖示邊框顏色"
 L["Icon position"] = "圖示位置"

@@ -10,13 +10,17 @@ externals:
   Libs/AceGUI-3.0: https://repos.wowace.com/wow/ace3/trunk/AceGUI-3.0
   Libs/AceHook-3.0: https://repos.wowace.com/wow/ace3/trunk/AceHook-3.0
   Libs/AceLocale-3.0: https://repos.wowace.com/wow/ace3/trunk/AceLocale-3.0
+  Libs/AceTimer-3.0: https://repos.wowace.com/wow/ace3/trunk/AceTimer-3.0
   Libs/CallbackHandler-1.0: https://repos.wowace.com/wow/callbackhandler/trunk/CallbackHandler-1.0
   Libs/LibStub: https://repos.wowace.com/wow/libstub/tags/1.0
 
 ignore:
   - README.md
-  - TODO.md
-  - screenshot.jpg
+  - screenshot1.jpg
+  - screenshot2.jpg
+  - screenshot3.jpg
+  - screenshot4.jpg
+  - screenshot5.jpg
 
 manual-changelog:
   filename: CHANGELOG.md

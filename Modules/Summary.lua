@@ -37,11 +37,11 @@ function Module:SummaryEnter(frame)
     self:SummaryHook(frame)
 end
 
-function Module:SummaryLeave(frame)
+function Module:SummaryLeave()
     self:CharacterFrameShow(P)
 end
 
-function Module:SummaryHook(frame)
+function Module:SummaryHook()
     if Config:GetOption("summary") ~= false then
         local corruptions = Scanner:GetCharacterCorruptions()
         if #corruptions > 0 then
