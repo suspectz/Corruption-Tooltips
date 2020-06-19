@@ -1,6 +1,14 @@
 What more is there to say, this is a simple tooltip addon that you can use to add the common name and rank for any applicable corruptions that apply to an item.
 
-![Tooltip Example](/screenshot.jpg?raw=true)
+![Tooltip Example](/screenshot1.jpg?raw=true)
+
+![Container Example](/screenshot2.jpg?raw=true)
+
+![Character Example](/screenshot3.jpg?raw=true)
+
+![MOTHER Example](/screenshot4.jpg?raw=true)
+
+![Contaminant Example](/screenshot5.jpg?raw=true)
 
 **Features:**
 
