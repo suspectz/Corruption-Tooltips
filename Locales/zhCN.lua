@@ -2,9 +2,9 @@ local L = LibStub("AceLocale-3.0"):NewLocale("CorruptionTooltips", "zhCN")
 if not L then return end
 
 -- Ranks
-L["I"] = "1 级"
-L["II"] = "2 级"
-L["III"] = "3 级"
+L["I"] = "I"
+L["II"] = "II"
+L["III"] = "III"
 
 -- Config (Header)
 L["Version"] = "版本"
