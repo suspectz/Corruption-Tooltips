@@ -1,3 +1,8 @@
+**1.8.4**
+- Fix: Icon rewrite caused Bagnon icon to not clear properly.
+- Fix: Don't run icon ranks through translation system. Just use roman numerals.
+- Update: zhCN translation, thanks LiangYuxuan.
+
 **1.8.3**
 - Feature: MOTHER items now have added tooltip info.
 - Feature: Icons can now include rank text.

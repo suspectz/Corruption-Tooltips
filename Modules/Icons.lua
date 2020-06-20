@@ -26,8 +26,6 @@ local function CreateCorruptionIcon(button, icon, rank)
     local offset_y = 2 * offset[position][2]
     if itemrank ~= true then
         rank = ""
-    elseif rank ~= "" and Config:GetOption("english") ~= false then
-        rank = L[rank]
     end
     if not button.corruption then
         -- Parent

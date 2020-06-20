@@ -19,6 +19,7 @@ end
 
 function CorruptionTooltips_Bagnon_Update(button)
     if not button then return end
+    Icons:ClearIcon(button)
     local bag, slot = button:GetParent():GetID(), button:GetID()
     -- need to catch 0, 0 and 100, 0 here because the bank frame doesn't
     -- load everything immediately, so the OnUpdate needs to run until those frames are opened.
@@ -26,7 +27,6 @@ function CorruptionTooltips_Bagnon_Update(button)
     local itemLoc = ItemLocation:CreateFromBagAndSlot(bag, slot)
 
     if (not itemLoc:IsValid()) then
-        Icons:ClearIcon(button)
         return
     end
 
@@ -36,9 +36,7 @@ end
 
 function CorruptionTooltips_Bagnon_UpdateBorder(button)
     if not button.info.link then return end
-
+    Icons:ClearIcon(button)
     local itemLink = button.info.link
-    if IsCorruptedItem(itemLink) then
-        button.IconOverlay:SetShown(true)
-    end
+    Icons:ApplyIcon(button, itemLink)
 end
