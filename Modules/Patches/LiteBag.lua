@@ -9,7 +9,7 @@ function Module:OnInitialize()
 end
 
 function Module:OnEnable()
-    if Config:GetOption("itemicon") ~= false then
+    if Config:GetOption("itemicon2") ~= false then
         if IsAddOnLoaded("LiteBag") then
             self:SecureHook("LiteBagItemButton_Update", CorruptionTooltips_LiteBag_Update)
         end

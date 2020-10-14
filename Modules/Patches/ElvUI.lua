@@ -9,7 +9,7 @@ function Module:OnInitialize()
 end
 
 function Module:OnEnable()
-    if Config:GetOption("itemicon") ~= false then
+    if Config:GetOption("itemicon2") ~= false then
         if IsAddOnLoaded("ElvUI") then
             self:SecureHook("ToggleBag", CorruptionTooltips_ElvUI_ToggleBag)
             self:SecureHook("OpenAllBags", CorruptionTooltips_ElvUI_ToggleBag)

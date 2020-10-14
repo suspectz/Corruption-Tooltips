@@ -9,7 +9,7 @@ function Module:OnInitialize()
 end
 
 function Module:OnEnable()
-    if Config:GetOption("itemicon") ~= false then
+    if Config:GetOption("itemicon2") ~= false then
         if IsAddOnLoaded("Bagnon") then
             self:SecureHook(Bagnon.Item, "Update", CorruptionTooltips_Bagnon_Update)
             self:SecureHook(Bagnon.Item, "UpdateBorder", CorruptionTooltips_Bagnon_UpdateBorder)

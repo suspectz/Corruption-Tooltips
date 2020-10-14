@@ -145,7 +145,7 @@ end
 function Module:OnLoad(event, ...)
     if (...) == "Blizzard_InspectUI" then
         self:UnregisterEvent(event)
-        if Config:GetOption("itemicon") ~= false then
+        if Config:GetOption("itemicon2") ~= false then
             self:SecureHook("InspectPaperDollItemSlotButton_Update", function(button)
                 SetPaperDollCorruption(button, InspectFrame.unit)
             end)
@@ -154,7 +154,7 @@ function Module:OnLoad(event, ...)
 end
 
 function Module:OnEnable()
-    if Config:GetOption("itemicon") ~= false then
+    if Config:GetOption("itemicon2") ~= false then
         -- inspecing a player
         self:SecureHook("PaperDollItemSlotButton_Update", function(button)
             SetPaperDollCorruption(button, "player")

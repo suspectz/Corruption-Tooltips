@@ -23,6 +23,7 @@ local defaults = {
         summary = true,
         showlevel = false,
         itemicon = false,
+        itemicon2 = false,
         itemrank = false,
         nzothlabel = false,
         iconposition = "BOTTOMLEFT",
@@ -239,18 +240,18 @@ local function AddConfig()
                 guiInline = true,
                 order = 50,
                 args = {
-                    itemicon = {
+                    itemicon2 = {
                         type = "toggle",
                         name = L["Show corruption icon atop of item in character screen and bags"],
                         desc = "",
                         set = function(_, val)
                             StaticPopup_Show("CorruptionTooltips_ReloadPopup")
-                            Module:SetOption("itemicon", val)
+                            Module:SetOption("itemicon2", val)
                             if val == false then
                                 Module:SetOption("nzothlabel", false)
                             end
                         end,
-                        get = function() return Module:GetOption("itemicon") end,
+                        get = function() return Module:GetOption("itemicon2") end,
                         width = "full",
                         order = 10,
                     },
@@ -263,7 +264,7 @@ local function AddConfig()
                         end,
                         get = function() return Module:GetOption("itemrank") end,
                         disabled = function()
-                            return not Module:GetOption("itemicon")
+                            return not Module:GetOption("itemicon2")
                         end,
                         width = "full",
                         order = 20,
@@ -277,7 +278,7 @@ local function AddConfig()
                         end,
                         get = function() return Module:GetOption("nzothlabel") end,
                         disabled = function()
-                            return not Module:GetOption("itemicon")
+                            return not Module:GetOption("itemicon2")
                         end,
                         width = "full",
                         order = 30,

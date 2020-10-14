@@ -1,3 +1,6 @@
+**1.8.5**
+- Bump TOC. Default icon to off. Have Fun in Shadowlands.
+
 **1.8.4**
 - Fix: Icon rewrite caused Bagnon icon to not clear properly.
 - Fix: Don't run icon ranks through translation system. Just use roman numerals.

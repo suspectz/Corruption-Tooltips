@@ -10,7 +10,7 @@ function Module:OnInitialize()
 end
 
 function Module:OnEnable()
-    if Config:GetOption("itemicon") ~= false then
+    if Config:GetOption("itemicon2") ~= false then
         if IsAddOnLoaded("AdiBags") then
             LibStub('ABEvent-1.0').RegisterMessage("CorruptionTooltips", "AdiBags_BagOpened", CorruptionTooltips_AdiBags_Update)
             LibStub('ABEvent-1.0').RegisterMessage("CorruptionTooltips", "AdiBags_ForceFullLayout", CorruptionTooltips_AdiBags_Update)
