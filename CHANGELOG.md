@@ -1,3 +1,6 @@
+**1.8.6**
+- Bump TOC.
+
 **1.8.5**
 - Bump TOC. Default icon to off. Have Fun in Shadowlands.
 
